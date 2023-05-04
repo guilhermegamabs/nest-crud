@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Param, Get } from '@nestjs/common';
+import { Body, Controller, Post, Param, Get, Delete } from '@nestjs/common';
 import { UserRepository } from './repositories/user-repository';
 import { CreateUser } from './dtos/create-user';
 
@@ -16,6 +16,12 @@ export class AppController {
   @Get('user/read/:id')
   async read(@Param('id') id: number) {
     const user = await this.userRepository.read(id);
+    return user;
+  }
+
+  @Delete('user/delete/:id')
+  async deleteUser(@Param('id') id: number) {
+    const user = await this.userRepository.deleteUser(id);
     return user;
   }
 }
