@@ -48,4 +48,26 @@ export class PrismaUserRepository implements UserRepository {
 
     return { message: 'User Deleted Successfully!' };
   }
+
+  async edit(id: number, name: string, age: number) {
+    const user = this.prisma.user.findUnique({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    if (!user) return { message: 'User does not exists on database' };
+
+    await this.prisma.user.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        name,
+        age,
+      },
+    });
+
+    return { message: 'User Edited Successfully!' };
+  }
 }
