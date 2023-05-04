@@ -34,4 +34,10 @@ export class AppController {
     const user = await this.userRepository.edit(id, name, age);
     return user;
   }
+
+  @Get('user/showall')
+  async showAll() {
+    const users = await this.userRepository.showAll();
+    return users;
+  }
 }

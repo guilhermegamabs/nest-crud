@@ -3,4 +3,5 @@ export abstract class UserRepository {
   abstract read(id: number);
   abstract deleteUser(id: number);
   abstract edit(id: number, name: string, age: number);
+  abstract showAll();
 }

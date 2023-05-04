@@ -6,13 +6,15 @@ import { Injectable } from '@nestjs/common';
 export class PrismaUserRepository implements UserRepository {
   constructor(private prisma: PrismaService) {}
   async create(name: string, email: string, age: number) {
-    await this.prisma.user.create({
+    const users = await this.prisma.user.create({
       data: {
         name,
         email,
         age,
       },
     });
+
+    return users;
   }
 
   async read(id: number) {
@@ -69,5 +71,10 @@ export class PrismaUserRepository implements UserRepository {
     });
 
     return { message: 'User Edited Successfully!' };
+  }
+
+  async showAll() {
+    const users = await this.prisma.user.findMany();
+    return users;
   }
 }
