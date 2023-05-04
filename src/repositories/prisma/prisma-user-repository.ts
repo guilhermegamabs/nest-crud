@@ -14,4 +14,12 @@ export class PrismaUserRepository implements UserRepository {
       },
     });
   }
+
+  async read(id: number) {
+    return await this.prisma.user.findUnique({
+      where: {
+        id: Number(id),
+      },
+    });
+  }
 }
